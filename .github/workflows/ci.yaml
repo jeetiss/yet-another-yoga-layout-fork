@@ -39,12 +39,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
+          cache: 'npm'
       - name: Download bundle
         uses: actions/download-artifact@v3
         with:
           name: bundle
           path: dist
       - name: Install
-        run: npm install
+        run: npm ci
       - name: Test
         run: npm test
