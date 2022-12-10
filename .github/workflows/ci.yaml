@@ -49,20 +49,3 @@ jobs:
         run: npm ci
       - name: Test
         run: npm test
-  size:
-    if: github.event_name == 'pull_request'
-    needs: build
-    runs-on: ubuntu-latest
-    env:
-      CI_JOB_NUMBER: 1
-    steps:
-      - uses: actions/checkout@v3
-      - name: Download bundle
-        uses: actions/download-artifact@v3
-        with:
-          name: bundle
-          path: dist
-      - uses: andresz1/size-limit-action@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          skip_step: build
