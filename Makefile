@@ -8,6 +8,7 @@ wasm:
 		-Iyoga \
 		-g0 \
 		-Os \
+		--closure 1 \
 		-s WASM=1 \
 		-s WASM_ASYNC_COMPILATION=1 \
 		-s USE_CLOSURE_COMPILER=1 \
@@ -31,6 +32,7 @@ asm:
 		-Iyoga \
 		-g0 \
 		-Os \
+		--closure 1 \
 		--memory-init-file 0 \
 		-s WASM=0 \
 		-s WASM_ASYNC_COMPILATION=1 \
@@ -54,6 +56,7 @@ asmSync:
 		-Iyoga \
 		-g0 \
 		-Os \
+		--closure 1 \
 		--memory-init-file 0 \
 		-s WASM=0 \
 		-s WASM_ASYNC_COMPILATION=0 \
