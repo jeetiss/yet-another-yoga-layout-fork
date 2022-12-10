@@ -1,10 +1,10 @@
 import entry from "./entry/index.js";
-import yoga from "./tmp/yoga-asm.mjs";
+import yoga from "./tmp/yoga-asm-sync.mjs";
 
 function bind(_, proto) {
   return proto;
 }
 
 export default function () {
-  return yoga().then((mod) => entry(bind, mod));
+  return entry(bind, yoga());
 }

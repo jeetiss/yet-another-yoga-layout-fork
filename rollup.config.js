@@ -5,7 +5,7 @@ import commonjs from "@rollup/plugin-commonjs";
 
 export default [
   {
-    input: ["asm.js", "index.js"],
+    input: ["asm.js", "index.js", "asmSync.js"],
     output: {
       dir: "dist",
       format: "esm",
@@ -16,7 +16,7 @@ export default [
         include: ["entry/index.js", "yoga/javascript/sources/YGEnums.js"],
       }),
       commonjs(),
-      terser(),
+      terser({ compress: { passes: 2 } }),
     ],
   },
 ];

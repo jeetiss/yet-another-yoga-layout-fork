@@ -7,12 +7,16 @@
   "exports": {
     "./package.json": "./package.json",
     ".": "./dist/index.js",
-    "./asm": "./dist/asm.js"
+    "./asm": "./dist/asm.js",
+    "./asmSync": "./dist/asmSync.js"
   },
   "scripts": {
     "build": "make && rollup -c --bundleConfigAsCjs && cp tmp/yoga.wasm dist/yoga.wasm",
     "gentests": "node ./test/gentest/run.js",
-    "test": "vitest"
+    "test": "npm run test:wasm && npm run test:asm && npm run test:asm-sync",
+    "test:wasm": "vitest run",
+    "test:asm": "YOGA_BUILD='asm' vitest run",
+    "test:asm-sync": "YOGA_BUILD='asmSync' vitest run"
   },
   "repository": "jeetiss/yet-another-yoga-layout-fork",
   "license": "MIT",
