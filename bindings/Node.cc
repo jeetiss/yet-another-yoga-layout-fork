@@ -133,6 +133,10 @@ void Node::setFlexBasisPercent(double flexBasis) {
   YGNodeStyleSetFlexBasisPercent(m_node, flexBasis);
 }
 
+void Node::setFlexBasisAuto() {
+  YGNodeStyleSetFlexBasisAuto(m_node);
+}
+
 void Node::setFlexGrow(double flexGrow) {
   YGNodeStyleSetFlexGrow(m_node, flexGrow);
 }

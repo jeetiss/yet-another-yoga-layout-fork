@@ -9,29 +9,7 @@
 
 using namespace emscripten;
 
-EMSCRIPTEN_BINDINGS(Config) {
-  class_<Config>("Config")
-    .constructor<>(&Config::create, allow_raw_pointers())
-    .class_function<>("create", &Config::create, allow_raw_pointers())
-    .class_function<>("destroy", &Config::destroy, allow_raw_pointers())
-    .function("setExperimentalFeatureEnabled", &Config::setExperimentalFeatureEnabled)
-    .function("setPointScaleFactor", &Config::setPointScaleFactor)
-    .function("isExperimentalFeatureEnabled", &Config::isExperimentalFeatureEnabled)
-  ;
-}
-
-EMSCRIPTEN_BINDINGS(Layout) {
-  value_object<Layout>("Layout")
-    .field("left", &Layout::left)
-    .field("right", &Layout::right)
-    .field("top", &Layout::top)
-    .field("bottom", &Layout::bottom)
-    .field("width", &Layout::width)
-    .field("height", &Layout::height)
-  ;
-}
-
-EMSCRIPTEN_BINDINGS(Node) {
+EMSCRIPTEN_BINDINGS(YOGA_LAYOUT) {
   class_<MeasureCallback>("MeasureCallback")
     .function("measure", &MeasureCallback::measure, pure_virtual())
     .allow_subclass<MeasureCallbackWrapper>("MeasureCallbackWrapper")
@@ -41,15 +19,33 @@ EMSCRIPTEN_BINDINGS(Node) {
     .allow_subclass<DirtiedCallbackWrapper>("DirtiedCallbackWrapper")
   ;
 
+  class_<Config>("Config")
+    .constructor<>(&Config::create, allow_raw_pointers())
+    .class_function<>("create", &Config::create, allow_raw_pointers())
+    .class_function<>("destroy", &Config::destroy, allow_raw_pointers())
+    .function("setExperimentalFeatureEnabled", &Config::setExperimentalFeatureEnabled)
+    .function("setPointScaleFactor", &Config::setPointScaleFactor)
+    .function("isExperimentalFeatureEnabled", &Config::isExperimentalFeatureEnabled)
+  ;
+
+  value_object<Layout>("Layout")
+    .field("left", &Layout::left)
+    .field("right", &Layout::right)
+    .field("top", &Layout::top)
+    .field("bottom", &Layout::bottom)
+    .field("width", &Layout::width)
+    .field("height", &Layout::height)
+  ;
+
   value_object<YGSize>("Size")
     .field("width", &YGSize::width)
     .field("height", &YGSize::height)
-    ;
+  ;
 
   value_object<Value>("Value")
     .field("value", &Value::value)
     .field("unit", &Value::unit)
-    ;
+  ;
 
   class_<Node>("Node")
     .constructor<>(&Node::createDefault, allow_raw_pointers())
@@ -82,6 +78,7 @@ EMSCRIPTEN_BINDINGS(Node) {
     .function("setFlex", &Node::setFlex)
     .function("setFlexBasis", &Node::setFlexBasis)
     .function("setFlexBasisPercent", &Node::setFlexBasisPercent)
+    .function("setFlexBasisAuto", &Node::setFlexBasisAuto)
     .function("setFlexGrow", &Node::setFlexGrow)
     .function("setFlexShrink", &Node::setFlexShrink)
 
