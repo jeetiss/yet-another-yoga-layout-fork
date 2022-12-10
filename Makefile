@@ -8,7 +8,6 @@ wasm:
 		-Iyoga \
 		-g0 \
 		-Os \
-		-flto \
 		-s WASM=1 \
 		-s WASM_ASYNC_COMPILATION=1 \
 		-s USE_CLOSURE_COMPILER=1 \
@@ -21,7 +20,7 @@ wasm:
 		-s ENVIRONMENT='web' \
 		-s FILESYSTEM=0 \
 		-s MALLOC="emmalloc" \
-		-s INCOMING_MODULE_JS_API=['instantiateWasm','locateFile']\
+		-s INCOMING_MODULE_JS_API=['instantiateWasm']\
 		-s EXPORT_NAME="yoga" \
 		-o tmp/yoga.mjs
 
@@ -31,7 +30,6 @@ asm:
 		-Iyoga \
 		-g0 \
 		-Os \
-		-flto \
 		--memory-init-file 0 \
 		-s WASM=0 \
 		-s WASM_ASYNC_COMPILATION=0 \

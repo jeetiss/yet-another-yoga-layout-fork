@@ -10,7 +10,7 @@
     "./asm": "./dist/asm.js"
   },
   "scripts": {
-    "build": "make && node build.js",
+    "build": "make && rollup -c --bundleConfigAsCjs && cp tmp/yoga.wasm dist/yoga.wasm",
     "gentests": "node ./test/gentest/run.js",
     "test": "vitest"
   },
@@ -23,10 +23,13 @@
     "LICENSE"
   ],
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^23.0.4",
+    "@rollup/plugin-terser": "^0.2.0",
+    "@rollup/pluginutils": "^5.0.2",
     "@types/jscodeshift": "^0.11.5",
-    "esbuild": "^0.14.18",
-    "esbuild-plugin-flow": "^0.3.2",
+    "flow-remove-types": "^2.195.1",
     "jscodeshift": "^0.14.0",
+    "rollup": "^3.7.2",
     "vitest": "^0.25.2"
   }
 }

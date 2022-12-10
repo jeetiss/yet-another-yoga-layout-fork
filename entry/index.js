@@ -238,7 +238,7 @@ function patch(prototype, name, fn) {
   }
 }
 
-module.exports = (bind: any, lib: any): Yoga => {
+export default (bind: any, lib: any): Yoga => {
   for (let fnName of [
     'setPosition',
     'setMargin',
