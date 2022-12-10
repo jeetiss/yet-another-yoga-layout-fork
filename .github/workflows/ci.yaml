@@ -21,7 +21,7 @@ jobs:
       - name: Install
         run: npm install
       - name: Build
-        run: pnpm build
+        run: npm build
       - name: Upload bundle
         uses: actions/upload-artifact@v3
         with:
