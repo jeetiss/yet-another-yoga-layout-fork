@@ -1,5 +1,5 @@
 {
-  "name": "yoga-wasm-web",
+  "name": "yet-another-yoga-layout-fork",
   "version": "0.2.0",
   "types": "index.d.ts",
   "typings": "index.d.ts",
@@ -14,7 +14,7 @@
     "gentests": "node ./test/gentest/run.js",
     "test": "vitest"
   },
-  "repository": "shuding/yoga-wasm-web",
+  "repository": "jeetiss/yet-another-yoga-layout-fork",
   "license": "MIT",
   "files": [
     "dist",
