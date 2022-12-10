@@ -1,6 +1,7 @@
 #include "./Config.hh"
 #include "./Layout.hh"
 #include "./Node.hh"
+#include "./Value.hh"
 
 #include <yoga/Yoga.h>
 
@@ -8,31 +9,11 @@
 
 using namespace emscripten;
 
-EMSCRIPTEN_BINDINGS(YGEnums) {
-  enum_<YGMeasureMode>("YGMeasureMode")
-    .value("undefined", YGMeasureModeUndefined)
-    .value("exactly", YGMeasureModeExactly)
-    .value("atMost", YGMeasureModeAtMost)
-  ;
-
-  enum_<YGUnit>("YGUnit")
-    .value("undefined", YGUnitUndefined)
-    .value("point", YGUnitPoint)
-    .value("percent", YGUnitPercent)
-    .value("auto", YGUnitAuto)
-  ;
-
-  enum_<YGGutter>("YGGutter")
-    .value("column", YGGutterColumn)
-    .value("row", YGGutterRow)
-    .value("all", YGGutterAll)
-  ;
-}
-
 EMSCRIPTEN_BINDINGS(Config) {
   class_<Config>("Config")
     .constructor<>(&Config::create, allow_raw_pointers())
     .class_function<>("create", &Config::create, allow_raw_pointers())
+    .class_function<>("destroy", &Config::destroy, allow_raw_pointers())
     .function("setExperimentalFeatureEnabled", &Config::setExperimentalFeatureEnabled)
     .function("setPointScaleFactor", &Config::setPointScaleFactor)
     .function("isExperimentalFeatureEnabled", &Config::isExperimentalFeatureEnabled)
@@ -65,9 +46,9 @@ EMSCRIPTEN_BINDINGS(Node) {
     .field("height", &YGSize::height)
     ;
 
-  value_object<YGValue>("Value")
-    .field("value", &YGValue::value)
-    .field("unit", &YGValue::unit)
+  value_object<Value>("Value")
+    .field("value", &Value::value)
+    .field("unit", &Value::unit)
     ;
 
   class_<Node>("Node")
@@ -171,6 +152,9 @@ EMSCRIPTEN_BINDINGS(Node) {
 
     .function("getParent", &Node::getParent, allow_raw_pointers())
     .function("getChild", &Node::getChild, allow_raw_pointers())
+
+    .function("isReferenceBaseline", &Node::isReferenceBaseline)
+    .function("setIsReferenceBaseline", &Node::setIsReferenceBaseline)
 
     .function("setMeasureFunc", &Node::setMeasureFunc, allow_raw_pointers())
     .function("unsetMeasureFunc", &Node::unsetMeasureFunc)
