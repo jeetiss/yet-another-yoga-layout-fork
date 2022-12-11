@@ -7,7 +7,7 @@ wasm:
 		--bind \
 		-Iyoga \
 		-g0 \
-		-Os \
+		-O3 \
 		--closure 1 \
 		-s WASM=1 \
 		-s WASM_ASYNC_COMPILATION=1 \
@@ -30,7 +30,7 @@ asm:
 		--bind \
 		-Iyoga \
 		-g0 \
-		-Os \
+		-O3 \
 		--closure 1 \
 		--memory-init-file 0 \
 		-s WASM=0 \
@@ -53,7 +53,7 @@ asmSync:
 		--bind \
 		-Iyoga \
 		-g0 \
-		-Os \
+		-O3 \
 		--closure 1 \
 		--memory-init-file 0 \
 		-s WASM=0 \
