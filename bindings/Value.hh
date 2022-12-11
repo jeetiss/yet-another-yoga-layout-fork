@@ -12,5 +12,5 @@ struct Value {
 
   Value(void) : unit(YGUnitUndefined), value(0.0) {}
 
-  Value(int unit, double value) : unit(unit), value(value) {} 
+  Value(int unit, double value) : unit(unit), value(value) {}
 };

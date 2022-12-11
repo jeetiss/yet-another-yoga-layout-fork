@@ -1,10 +1,11 @@
-#include <algorithm>
+#include "./Node.hh"
 
 #include <yoga/Yoga.h>
 
-#include "./Node.hh"
-#include "./Layout.hh"
+#include <algorithm>
+
 #include "./Config.hh"
+#include "./Layout.hh"
 #include "./Value.hh"
 
 static YGSize globalMeasureFunc(
@@ -231,7 +232,7 @@ int Node::getPositionType(void) const {
 
 Value Node::getPosition(int edge) const {
   return Value::fromYGValue(
-    YGNodeStyleGetPosition(m_node, static_cast<YGEdge>(edge)));
+      YGNodeStyleGetPosition(m_node, static_cast<YGEdge>(edge)));
 }
 
 int Node::getAlignContent(void) const {
@@ -260,7 +261,7 @@ int Node::getJustifyContent(void) const {
 
 Value Node::getMargin(int edge) const {
   return Value::fromYGValue(
-    YGNodeStyleGetMargin(m_node, static_cast<YGEdge>(edge)));
+      YGNodeStyleGetMargin(m_node, static_cast<YGEdge>(edge)));
 }
 
 int Node::getOverflow(void) const {
@@ -357,7 +358,7 @@ Node* Node::getChild(unsigned index) {
   return Node::fromYGNode(nodePtr);
 }
 
-void Node::setMeasureFunc(MeasureCallback *measureFunc) {
+void Node::setMeasureFunc(MeasureCallback* measureFunc) {
   m_measureFunc.reset(measureFunc);
 
   YGNodeSetMeasureFunc(m_node, &globalMeasureFunc);
@@ -377,7 +378,7 @@ YGSize Node::callMeasureFunc(
   return m_measureFunc->measure(width, widthMode, height, heightMode);
 }
 
-void Node::setDirtiedFunc(DirtiedCallback *dirtiedFunc) {
+void Node::setDirtiedFunc(DirtiedCallback* dirtiedFunc) {
   m_dirtiedFunc.reset(dirtiedFunc);
 
   YGNodeSetDirtiedFunc(m_node, &globalDirtiedFunc);

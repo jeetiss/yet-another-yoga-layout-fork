@@ -1,72 +1,64 @@
 #pragma once
 
-#include <memory>
-
+#include <emscripten/bind.h>
 #include <yoga/Yoga.h>
 
-#include <emscripten/bind.h>
+#include <memory>
 
-#include "./Layout.hh"
 #include "./Config.hh"
+#include "./Layout.hh"
 #include "./Value.hh"
 
-struct MeasureCallback
-{
+struct MeasureCallback {
   virtual YGSize measure(float width,
-      int widthMode,
-      float height,
-      int heightMode) = 0;
+                         int widthMode,
+                         float height,
+                         int heightMode) = 0;
 };
 
-struct MeasureCallbackWrapper : public emscripten::wrapper<MeasureCallback>
-{
+struct MeasureCallbackWrapper : public emscripten::wrapper<MeasureCallback> {
   EMSCRIPTEN_WRAPPER(MeasureCallbackWrapper);
-  YGSize measure(float width, int widthMode, float height, int heightMode)
-  {
+  YGSize measure(float width, int widthMode, float height, int heightMode) {
     return call<YGSize>("measure", width, widthMode, height, heightMode);
   }
 };
 
-struct DirtiedCallback
-{
+struct DirtiedCallback {
   virtual void dirtied() = 0;
 };
 
-struct DirtiedCallbackWrapper : public emscripten::wrapper<DirtiedCallback>
-{
+struct DirtiedCallbackWrapper : public emscripten::wrapper<DirtiedCallback> {
   EMSCRIPTEN_WRAPPER(DirtiedCallbackWrapper);
-  void dirtied()
-  {
+  void dirtied() {
     return call<void>("dirtied");
   }
 };
 
 class Node {
-
-public:
+ public:
   static Node* createDefault(void);
   static Node* createWithConfig(Config* config);
 
   static void destroy(Node* node);
 
-public:
+ public:
   static Node* fromYGNode(YGNodeRef nodeRef);
 
-private:
+ private:
   Node(Config* config);
 
-public:
+ public:
   ~Node(void);
 
-public: // Prevent accidental copy
+ public:  // Prevent accidental copy
   Node(Node const&) = delete;
 
   Node const& operator=(Node const&) = delete;
 
-public:
+ public:
   void reset(void);
 
-public: // Style setters
+ public:  // Style setters
   void copyStyle(Node const& other);
 
   void setPositionType(int positionType);
@@ -120,7 +112,7 @@ public: // Style setters
 
   void setGap(int gutter, double gapLength);
 
-public: // Style getters
+ public:  // Style getters
   int getPositionType(void) const;
   Value getPosition(int edge) const;
 
@@ -154,14 +146,14 @@ public: // Style getters
   double getBorder(int edge) const;
 
   Value getPadding(int edge) const;
-  
+
   double getGap(int gutter);
 
-public: // Tree hierarchy mutators
+ public:  // Tree hierarchy mutators
   void insertChild(Node* child, unsigned index);
   void removeChild(Node* child);
 
-public: // Tree hierarchy inspectors
+ public:  // Tree hierarchy inspectors
   unsigned getChildCount(void) const;
 
   // The following functions cannot be const because they could discard const
@@ -170,32 +162,32 @@ public: // Tree hierarchy inspectors
   Node* getParent(void);
   Node* getChild(unsigned index);
 
-public: // Measure func mutators
-  void setMeasureFunc(MeasureCallback *measureFunc);
+ public:  // Measure func mutators
+  void setMeasureFunc(MeasureCallback* measureFunc);
   void unsetMeasureFunc(void);
 
-public: // Measure func inspectors
+ public:  // Measure func inspectors
   YGSize callMeasureFunc(
       double width,
       YGMeasureMode widthMode,
       double height,
       YGMeasureMode heightMode) const;
 
-public: // Dirtied func mutators
-  void setDirtiedFunc(DirtiedCallback *dirtiedFunc);
+ public:  // Dirtied func mutators
+  void setDirtiedFunc(DirtiedCallback* dirtiedFunc);
   void unsetDirtiedFunc(void);
 
-public: // Dirtied func inspectors
+ public:  // Dirtied func inspectors
   void callDirtiedFunc(void) const;
 
-public: // Dirtiness accessors
+ public:  // Dirtiness accessors
   void markDirty(void);
   bool isDirty(void) const;
 
-public: // Layout mutators
+ public:  // Layout mutators
   void calculateLayout(double width, double height, int direction);
 
-public: // Layout inspectors
+ public:  // Layout inspectors
   double getComputedLeft(void) const;
   double getComputedRight(void) const;
 
@@ -211,7 +203,7 @@ public: // Layout inspectors
   double getComputedBorder(int edge) const;
   double getComputedPadding(int edge) const;
 
-public:
+ public:
   void setIsReferenceBaseline(bool isReferenceBaseline);
   bool isReferenceBaseline();
 
