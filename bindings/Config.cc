@@ -1,6 +1,6 @@
-#include <yoga/Yoga.h>
-
 #include "./Config.hh"
+
+#include <yoga/Yoga.h>
 
 /* static */ Config* Config::create(void) {
   return new Config();
