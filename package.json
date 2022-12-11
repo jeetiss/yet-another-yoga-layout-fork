@@ -10,6 +10,7 @@
     "./asmSync": "./dist/asmSync.js"
   },
   "scripts": {
+    "echo:cow": "echo 'cow'",
     "build": "make && rollup -c --bundleConfigAsCjs && cp tmp/yoga.wasm dist/yoga.wasm",
     "gentest": "node ./test/gentest/run.js",
     "test": "npm run test:wasm && npm run test:asm && npm run test:asm-sync",
