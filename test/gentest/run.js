@@ -1,7 +1,7 @@
 import { run as jscodeshift } from "jscodeshift/src/Runner.js";
 import { fileURLToPath } from "node:url";
 import { copyFile, readdir } from "node:fs/promises";
-import { join } from "node:path";
+import { join, relative } from "node:path";
 
 const OUT_DIR = fileURLToPath(new URL("..", import.meta.url));
 const DIR = fileURLToPath(
@@ -20,7 +20,10 @@ const files = (
           : filename.replace(".js", ".test.js")
       );
       await copyFile(join(DIR, filename), newDir);
-      return newDir;
+      return {
+        filename: newDir,
+        copyFrom: relative(OUT_DIR, join(DIR, filename)),
+      };
     })
   )
 )
@@ -31,9 +34,18 @@ const transformPath = fileURLToPath(
   new URL("./transform.cjs", import.meta.url)
 );
 
-const res = await jscodeshift(transformPath, files, {
-  verbose: 1,
-  babel: false,
-});
+const yogaPathsMap = Object.fromEntries(
+  files.map(({ filename, copyFrom }) => [filename, copyFrom])
+);
+
+const res = await jscodeshift(
+  transformPath,
+  files.map(({ filename }) => filename),
+  {
+    yogaPathsMap,
+    verbose: 1,
+    babel: false,
+  }
+);
 
 console.log(res);
