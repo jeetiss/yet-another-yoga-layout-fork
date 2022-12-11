@@ -3,7 +3,7 @@ CC=emcc
 all: clean dir wasm asm asmSync
 
 wasm:
-	$(CC) yoga/yoga/*.cpp bindings/*.cc \
+	$(CC) yoga/yoga/*.cpp yoga/yoga/**/*.cpp bindings/*.cc \
 		--bind \
 		-Iyoga \
 		-g0 \
@@ -19,7 +19,6 @@ wasm:
 		-s DYNAMIC_EXECUTION=0 \
 		-s TEXTDECODER=0 \
 		-s ENVIRONMENT='web' \
-		-s ERROR_ON_UNDEFINED_SYMBOLS=0 \
 		-s FILESYSTEM=0 \
 		-s MALLOC="emmalloc" \
 		-s INCOMING_MODULE_JS_API=['instantiateWasm']\
@@ -27,7 +26,7 @@ wasm:
 		-o tmp/yoga.mjs
 
 asm:
-	$(CC) yoga/yoga/*.cpp bindings/*.cc \
+	$(CC) yoga/yoga/*.cpp yoga/yoga/**/*.cpp bindings/*.cc \
 		--bind \
 		-Iyoga \
 		-g0 \
@@ -44,14 +43,13 @@ asm:
 		-s DYNAMIC_EXECUTION=0 \
 		-s TEXTDECODER=0 \
 		-s ENVIRONMENT='web' \
-		-s ERROR_ON_UNDEFINED_SYMBOLS=0 \
 		-s FILESYSTEM=0 \
 		-s MALLOC="emmalloc" \
 		-s EXPORT_NAME="yoga" \
 		-o tmp/yoga-asm.mjs
 
 asmSync:
-	$(CC) yoga/yoga/*.cpp bindings/*.cc \
+	$(CC) yoga/yoga/*.cpp yoga/yoga/**/*.cpp bindings/*.cc \
 		--bind \
 		-Iyoga \
 		-g0 \
@@ -68,7 +66,6 @@ asmSync:
 		-s DYNAMIC_EXECUTION=0 \
 		-s TEXTDECODER=0 \
 		-s ENVIRONMENT='web' \
-		-s ERROR_ON_UNDEFINED_SYMBOLS=0 \
 		-s FILESYSTEM=0 \
 		-s MALLOC="emmalloc" \
 		-s EXPORT_NAME="yoga" \
