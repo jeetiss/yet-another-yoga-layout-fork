@@ -62,7 +62,7 @@ jobs:
         with:
           name: bundle
           path: dist
-      - uses: andresz1/size-limit-action@v1
+      - uses: andresz1/size-limit-action@v1.7.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           build_script: 'echo:cow'
