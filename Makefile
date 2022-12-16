@@ -8,6 +8,11 @@ wasm:
 		-Iyoga \
 		-g0 \
 		-Os \
+		-flto \
+		-std=c++14 \
+		-fno-exceptions \
+		-fno-rtti \
+		-DEMSCRIPTEN_HAS_UNBOUND_TYPE_NAMES=0 \
 		--closure 1 \
 		-s WASM=1 \
 		-s WASM_ASYNC_COMPILATION=1 \
@@ -31,6 +36,11 @@ asm:
 		-Iyoga \
 		-g0 \
 		-Os \
+		-flto \
+		-std=c++14 \
+		-fno-exceptions \
+		-fno-rtti \
+		-DEMSCRIPTEN_HAS_UNBOUND_TYPE_NAMES=0 \
 		--closure 1 \
 		--memory-init-file 0 \
 		-s WASM=0 \
@@ -54,6 +64,11 @@ asmSync:
 		-Iyoga \
 		-g0 \
 		-Os \
+		-flto \
+		-std=c++14 \
+		-fno-exceptions \
+		-fno-rtti \
+		-DEMSCRIPTEN_HAS_UNBOUND_TYPE_NAMES=0 \
 		--closure 1 \
 		--memory-init-file 0 \
 		-s WASM=0 \
