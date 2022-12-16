@@ -57,7 +57,7 @@ const Yoga = await initYoga(
 | ------- | --------------------- | -------------- |
 | asm     | 46.67 kB              | 708ms          |
 | asmSync | 46.62 kB              | 751ms          |
-| wasm    | 10.4  kB + 25,85 kB   | 359ms          |
+| wasm    | 10.4  kB + 25.85 kB   | 359ms          |
 
 ## Acknowledgements
 
