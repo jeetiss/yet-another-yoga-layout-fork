@@ -55,9 +55,9 @@ const Yoga = await initYoga(
 
 | bundle  | size (JS + WASM) gzip | test run speed |
 | ------- | --------------------- | -------------- |
-| asm     | 50.59 kB              | 734ms          |
-| asmSync | 50.51 kB              | 738ms          |
-| wasm    | 10.64 kB + 28.27 kB   | 339ms          |
+| asm     | 46.67 kB              | 708ms          |
+| asmSync | 46.62 kB              | 751ms          |
+| wasm    | 10.4  kB + 25,85 kB   | 359ms          |
 
 ## Acknowledgements
 
