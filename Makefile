@@ -20,7 +20,6 @@ wasm:
 		-s TEXTDECODER=0 \
 		-s ENVIRONMENT='web' \
 		-s FILESYSTEM=0 \
-		-s MALLOC="emmalloc" \
 		-s INCOMING_MODULE_JS_API=['instantiateWasm']\
 		-s EXPORT_NAME="yoga" \
 		-o tmp/yoga.mjs
@@ -44,7 +43,6 @@ asm:
 		-s TEXTDECODER=0 \
 		-s ENVIRONMENT='web' \
 		-s FILESYSTEM=0 \
-		-s MALLOC="emmalloc" \
 		-s EXPORT_NAME="yoga" \
 		-o tmp/yoga-asm.mjs
 
@@ -67,7 +65,6 @@ asmSync:
 		-s TEXTDECODER=0 \
 		-s ENVIRONMENT='web' \
 		-s FILESYSTEM=0 \
-		-s MALLOC="emmalloc" \
 		-s EXPORT_NAME="yoga" \
 		-o tmp/yoga-asm-sync.mjs
 
