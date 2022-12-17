@@ -31,7 +31,7 @@ const init = async (type) => {
   }
 };
 
-for (let type of ["asm", "asmSync", "wasm", "yoga-layout-prebuilt"]) {
+for (let type of ["yoga-layout-prebuilt", "asm", "asmSync", "wasm"]) {
   for (let file of testFiles) {
     vm.runInNewContext(
       file,
