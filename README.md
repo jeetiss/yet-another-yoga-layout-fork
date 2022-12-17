@@ -53,11 +53,12 @@ const Yoga = await initYoga(
 
 ## Size & Perf
 
-| bundle  | size (JS + WASM) gzip | test run speed |
-| ------- | --------------------- | -------------- |
-| asm     | 46.67 kB              | 708ms          |
-| asmSync | 46.62 kB              | 751ms          |
-| wasm    | 10.4  kB + 25.85 kB   | 359ms          |
+| bundle                               | size (JS + WASM) gzip |
+| ------------------------------------ | --------------------- |
+| yoga-layout-prebuilt                 | 79.23 kB              |
+| yet-another-yoga-layout-fork/asm     | 46.67 kB              |
+| yet-another-yoga-layout-fork/asmSync | 46.62 kB              |
+| yet-another-yoga-layout-fork/wasm    | 10.4  kB + 25.85 kB   |
 
 ## Acknowledgements
 

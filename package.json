@@ -17,7 +17,8 @@
     "test:wasm": "vitest run",
     "test:asm": "YOGA_BUILD='asm' vitest run",
     "test:asm-sync": "YOGA_BUILD='asmSync' vitest run",
-    "size": "size-limit"
+    "size": "size-limit",
+    "benchmark": "node test/bench/run.js test/bench/index.js"
   },
   "repository": "jeetiss/yet-another-yoga-layout-fork",
   "license": "MIT",
@@ -54,6 +55,7 @@
     "jscodeshift": "^0.14.0",
     "rollup": "^3.7.2",
     "size-limit": "^8.1.0",
-    "vitest": "^0.25.2"
+    "vitest": "^0.25.2",
+    "yoga-layout-prebuilt": "^1.10.0"
   }
 }
