@@ -1,4 +1,4 @@
-var ITERATIONS = 2000;
+var ITERATIONS = 5000;
 
 YGBENCHMARK("Stack with flex", function () {
   var root = Yoga.Node.create();
