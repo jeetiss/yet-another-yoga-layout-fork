@@ -6,10 +6,15 @@ on:
   pull_request:
     branches: ["main"]
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     name: Compile C++ to wasm
+    timeout-minutes: 6
     steps:
       - uses: actions/checkout@v3
         with:
@@ -34,6 +39,7 @@ jobs:
       matrix:
         node: [14, 16, 18]
     name: Test node v${{ matrix.node }}
+    timeout-minutes: 2
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -53,6 +59,8 @@ jobs:
     if: github.event_name == 'pull_request'
     needs: build
     runs-on: ubuntu-latest
+    name: Check size
+    timeout-minutes: 2
     env:
       CI_JOB_NUMBER: 1
     steps:
