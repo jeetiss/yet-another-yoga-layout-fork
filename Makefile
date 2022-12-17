@@ -7,7 +7,7 @@ wasm:
 		--bind \
 		-Iyoga \
 		-g0 \
-		-Os \
+		-O3 \
 		-flto \
 		-std=c++14 \
 		-fno-exceptions \
