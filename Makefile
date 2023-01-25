@@ -3,7 +3,7 @@ CC=emcc
 all: clean dir wasm asm asmSync
 
 wasm:
-	$(CC) yoga/yoga/*.cpp yoga/yoga/**/*.cpp bindings/*.cc \
+	$(CC) yoga/yoga/*.cpp yoga/yoga/**/*.cpp yoga/javascript/src_native/*.cc \
 		--bind \
 		-Iyoga \
 		-g0 \
@@ -31,7 +31,7 @@ wasm:
 		-o tmp/yoga.mjs
 
 asm:
-	$(CC) yoga/yoga/*.cpp yoga/yoga/**/*.cpp bindings/*.cc \
+	$(CC) yoga/yoga/*.cpp yoga/yoga/**/*.cpp yoga/javascript/src_native/*.cc \
 		--bind \
 		-Iyoga \
 		-g0 \
@@ -59,7 +59,7 @@ asm:
 		-o tmp/yoga-asm.mjs
 
 asmSync:
-	$(CC) yoga/yoga/*.cpp yoga/yoga/**/*.cpp bindings/*.cc \
+	$(CC) yoga/yoga/*.cpp yoga/yoga/**/*.cpp yoga/javascript/src_native/*.cc \
 		--bind \
 		-Iyoga \
 		-g0 \
