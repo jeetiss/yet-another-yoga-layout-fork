@@ -1,7 +1,6 @@
 {
   "name": "yet-another-yoga-layout-fork",
   "version": "0.0.1",
-  "types": "index.d.ts",
   "type": "module",
   "exports": {
     "./package.json": "./package.json",
