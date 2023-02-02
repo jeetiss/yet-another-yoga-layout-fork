@@ -4,9 +4,11 @@
   "type": "module",
   "exports": {
     "./package.json": "./package.json",
+    "./dist/yoga.wasm": "./dist/yoga.wasm",
     ".": "./dist/index.js",
     "./asm": "./dist/asm.js",
-    "./asmSync": "./dist/asmSync.js"
+    "./asmSync": "./dist/asmSync.js",
+    "./compat": "./dist/compat.js"
   },
   "scripts": {
     "echo:cow": "echo 'cow'",
