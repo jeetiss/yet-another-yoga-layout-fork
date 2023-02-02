@@ -1,26 +1,13 @@
-import entry from "./entry/index.js";
+import wrapAsm from "./yoga/javascript/src_js/wrapAsm.js";
 import yoga from "./tmp/yoga.mjs";
-
-function bind(_, proto) {
-  return proto;
-}
+export * from "./yoga/javascript/src_js/generated/YGEnums.js";
 
 export default function (wasm) {
   return yoga({
     instantiateWasm(info, receive) {
-      WebAssembly.instantiate(wasm, info).then((instance) => {
-        receive(instance.instance || instance);
+      WebAssembly.instantiate(wasm, info).then(({ instance }) => {
+        receive(instance);
       });
     },
-  }).then((mod) => entry(bind, mod));
-}
-
-export function initStreaming(response) {
-  return yoga({
-    instantiateWasm(info, receive) {
-      WebAssembly.instantiateStreaming(response, info).then((instance) => {
-        receive(instance.instance || instance);
-      });
-    },
-  }).then((mod) => entry(bind, mod));
+  }).then((mod) => wrapAsm(mod));
 }

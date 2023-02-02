@@ -1,10 +1,6 @@
-import entry from "./entry/index.js";
+import wrapAsm from "./yoga/javascript/src_js/wrapAsm.js";
 import yoga from "./tmp/yoga-asm-sync.mjs";
 
-function bind(_, proto) {
-  return proto;
-}
-
 export default function () {
-  return entry(bind, yoga());
+  return wrapAsm(yoga());
 }

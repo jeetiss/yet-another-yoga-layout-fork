@@ -1,10 +1,7 @@
-import entry from "./entry/index.js";
+import wrapAsm from "./yoga/javascript/src_js/wrapAsm.js";
 import yoga from "./tmp/yoga-asm.mjs";
-
-function bind(_, proto) {
-  return proto;
-}
+export * from "./yoga/javascript/src_js/generated/YGEnums.js";
 
 export default function () {
-  return yoga().then((mod) => entry(bind, mod));
+  return yoga().then((mod) => wrapAsm(mod));
 }

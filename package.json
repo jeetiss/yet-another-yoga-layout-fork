@@ -1,7 +1,6 @@
 {
   "name": "yet-another-yoga-layout-fork",
   "version": "0.0.1",
-  "types": "index.d.ts",
   "type": "module",
   "exports": {
     "./package.json": "./package.json",
@@ -14,9 +13,9 @@
     "build": "make && rollup -c --bundleConfigAsCjs && cp tmp/yoga.wasm dist/yoga.wasm",
     "gentest": "node ./test/gentest/run.js",
     "test": "npm run test:wasm && npm run test:asm && npm run test:asm-sync",
-    "test:wasm": "vitest run",
-    "test:asm": "YOGA_BUILD='asm' vitest run",
-    "test:asm-sync": "YOGA_BUILD='asmSync' vitest run",
+    "test:wasm": "vitest run --dir ./test",
+    "test:asm": "YOGA_BUILD='asm' vitest run --dir ./test",
+    "test:asm-sync": "YOGA_BUILD='asmSync' vitest run --dir ./test",
     "size": "size-limit",
     "benchmark": "node test/bench/run.js test/bench/index.js"
   },
@@ -46,16 +45,14 @@
     }
   ],
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^23.0.4",
-    "@rollup/plugin-terser": "^0.2.0",
-    "@rollup/pluginutils": "^5.0.2",
-    "@size-limit/preset-small-lib": "^8.1.0",
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-terser": "^0.4.0",
+    "@size-limit/preset-small-lib": "^8.1.2",
     "@types/jscodeshift": "^0.11.5",
-    "flow-remove-types": "^2.195.1",
     "jscodeshift": "^0.14.0",
-    "rollup": "^3.7.2",
-    "size-limit": "^8.1.0",
-    "vitest": "^0.25.2",
+    "rollup": "^3.10.1",
+    "size-limit": "^8.1.2",
+    "vitest": "^0.28.2",
     "yoga-layout-prebuilt": "^1.10.0"
   }
 }
