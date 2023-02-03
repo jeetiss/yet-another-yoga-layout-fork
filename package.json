@@ -20,8 +20,7 @@
     "test:asm-sync": "YOGA_BUILD='asmSync' vitest run --dir ./test",
     "test:compat": "YOGA_BUILD='compat' vitest run --dir ./test",
     "size": "size-limit",
-    "benchmark": "node test/bench/run.js test/bench/index.js",
-    "postinstall": "patch-package"
+    "benchmark": "node test/bench/run.js test/bench/index.js"
   },
   "repository": "jeetiss/yet-another-yoga-layout-fork",
   "license": "MIT",
@@ -55,14 +54,11 @@
   ],
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.1",
-    "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-terser": "^0.4.0",
     "@size-limit/preset-small-lib": "^8.1.2",
     "@types/jscodeshift": "^0.11.5",
     "jscodeshift": "^0.14.0",
-    "patch-package": "^6.5.1",
     "rollup": "^3.10.1",
-    "simple-yenc": "^0.2.3",
     "size-limit": "^8.1.2",
     "vitest": "^0.28.2",
     "yoga-layout-prebuilt": "^1.10.0"

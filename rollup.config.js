@@ -1,10 +1,9 @@
 import terser from "@rollup/plugin-terser";
 import commonjs from "@rollup/plugin-commonjs";
-import nodeResolve from "@rollup/plugin-node-resolve";
 
 import { createFilter } from "@rollup/pluginutils";
-import { dynamicEncode } from "simple-yenc/src/simple-yenc.mjs";
-import { readFileSync } from "fs";
+import { dynamicEncode } from "./vendors/simple-yenc.js";
+import { readFileSync } from "node:fs";
 
 function yEncode(opts = {}) {
   if (!opts.include) {
@@ -36,7 +35,6 @@ export default [
     },
     plugins: [
       yEncode({ include: "tmp/yoga.wasm" }),
-      nodeResolve(),
       commonjs(),
       terser({ compress: { passes: 2 } }),
     ],

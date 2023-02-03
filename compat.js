@@ -1,4 +1,4 @@
-import { decode } from "simple-yenc/src/simple-yenc.mjs";
+import { decode } from "./vendors/simple-yenc.js";
 import initYoga from "./index.js";
 import wasm from "./tmp/yoga.wasm";
 
