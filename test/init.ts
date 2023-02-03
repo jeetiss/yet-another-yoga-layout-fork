@@ -2,7 +2,9 @@ import { readFile } from "node:fs/promises";
 
 let Yoga;
 
-if (process.env.YOGA_BUILD === "asm") {
+if (process.env.YOGA_BUILD === "compat") {
+  Yoga = await (await import("../dist/compat")).default();
+} else if (process.env.YOGA_BUILD === "asm") {
   Yoga = await (await import("../dist/asm")).default();
 } else if (process.env.YOGA_BUILD === "asmSync") {
   Yoga = (await import("../dist/asmSync")).default();
@@ -16,4 +18,3 @@ if (process.env.YOGA_BUILD === "asm") {
 }
 
 export { Yoga };
-

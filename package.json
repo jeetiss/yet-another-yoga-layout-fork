@@ -4,20 +4,24 @@
   "type": "module",
   "exports": {
     "./package.json": "./package.json",
+    "./dist/yoga.wasm": "./dist/yoga.wasm",
     ".": "./dist/index.js",
     "./asm": "./dist/asm.js",
-    "./asmSync": "./dist/asmSync.js"
+    "./asmSync": "./dist/asmSync.js",
+    "./compat": "./dist/compat.js"
   },
   "scripts": {
     "echo:cow": "echo 'cow'",
-    "build": "make && rollup -c --bundleConfigAsCjs && cp tmp/yoga.wasm dist/yoga.wasm",
+    "build": "make && rollup -c && cp tmp/yoga.wasm dist/yoga.wasm",
     "gentest": "node ./test/gentest/run.js",
-    "test": "npm run test:wasm && npm run test:asm && npm run test:asm-sync",
+    "test": "npm run test:compat && npm run test:wasm && npm run test:asm && npm run test:asm-sync",
     "test:wasm": "vitest run --dir ./test",
     "test:asm": "YOGA_BUILD='asm' vitest run --dir ./test",
     "test:asm-sync": "YOGA_BUILD='asmSync' vitest run --dir ./test",
+    "test:compat": "YOGA_BUILD='compat' vitest run --dir ./test",
     "size": "size-limit",
-    "benchmark": "node test/bench/run.js test/bench/index.js"
+    "benchmark": "node test/bench/run.js test/bench/index.js",
+    "postinstall": "patch-package"
   },
   "repository": "jeetiss/yet-another-yoga-layout-fork",
   "license": "MIT",
@@ -42,15 +46,23 @@
       "path": "dist/asmSync.js",
       "import": "initYoga",
       "name": "asmSync"
+    },
+    {
+      "path": "dist/compat.js",
+      "import": "initYoga",
+      "name": "compat"
     }
   ],
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-terser": "^0.4.0",
     "@size-limit/preset-small-lib": "^8.1.2",
     "@types/jscodeshift": "^0.11.5",
     "jscodeshift": "^0.14.0",
+    "patch-package": "^6.5.1",
     "rollup": "^3.10.1",
+    "simple-yenc": "^0.2.3",
     "size-limit": "^8.1.2",
     "vitest": "^0.28.2",
     "yoga-layout-prebuilt": "^1.10.0"

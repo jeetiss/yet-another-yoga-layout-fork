@@ -1,0 +1,16 @@
+diff --git a/node_modules/simple-yenc/src/simple-yenc.js b/node_modules/simple-yenc/src/simple-yenc.mjs
+similarity index 99%
+rename from node_modules/simple-yenc/src/simple-yenc.js
+rename to node_modules/simple-yenc/src/simple-yenc.mjs
+index 69e5925..4c30cfd 100644
+--- a/node_modules/simple-yenc/src/simple-yenc.js
++++ b/node_modules/simple-yenc/src/simple-yenc.mjs
+@@ -193,7 +193,7 @@ const stringify = (rawString) =>
+     .replace(/[`]/g, "\\`")
+     .replace(/\${/g, "\\${");
+ 
+-module.exports = {
++export {
+   encode,
+   dynamicEncode,
+   decode,
