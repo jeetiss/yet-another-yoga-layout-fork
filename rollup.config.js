@@ -1,35 +1,27 @@
-import { readFileSync } from "fs";
 import terser from "@rollup/plugin-terser";
 import commonjs from "@rollup/plugin-commonjs";
-import { dynamicEncode } from "simple-yenc";
+import nodeResolve from "@rollup/plugin-node-resolve";
 
-const template = ({ quote, wasm }) =>
-  Buffer.concat(
-    ["const wasm = String.raw", quote, wasm, quote, ";export default wasm"].map(
-      Buffer.from
-    )
-  );
+import { createFilter } from "@rollup/pluginutils";
+import { dynamicEncode } from "simple-yenc/src/simple-yenc.mjs";
+import { readFileSync } from "fs";
 
-function yenc(options = {}) {
+function yEncode(opts = {}) {
+  if (!opts.include) {
+    throw Error("include option must be specified");
+  }
+
+  const filter = createFilter(opts.include, opts.exclude);
+  const strQuote = "`";
   return {
-    name: "yenc",
-
+    name: "yEncode",
     load(id) {
-      if (id.slice(-5) !== ".wasm") return null;
-
-      try {
-        const wasmBuffer = readFileSync(id);
-
-        const dynEncodedWasm = {
-          wasm: dynamicEncode(wasmBuffer, "`"),
-          quote: "`",
-        };
-
-        return template(dynEncodedWasm).toString();
-      } catch (err) {
-        const message = "Could not parse JSON file";
-        this.error({ message, id, cause: err });
-        return null;
+      if (filter(id)) {
+        const fileData = readFileSync(id);
+        const decode = dynamicEncode(fileData, strQuote);
+        return ["export default String.raw", strQuote, decode, strQuote].join(
+          ""
+        );
       }
     },
   };
@@ -42,7 +34,11 @@ export default [
       dir: "dist",
       format: "esm",
     },
-    plugins: [commonjs(), yenc(), terser({ compress: { passes: 2 } })],
-    external: ["simple-yenc"],
+    plugins: [
+      yEncode({ include: "tmp/yoga.wasm" }),
+      nodeResolve(),
+      commonjs(),
+      terser({ compress: { passes: 2 } }),
+    ],
   },
 ];
