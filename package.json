@@ -54,11 +54,13 @@
   ],
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-terser": "^0.4.0",
     "@size-limit/preset-small-lib": "^8.1.2",
     "@types/jscodeshift": "^0.11.5",
     "jscodeshift": "^0.14.0",
     "rollup": "^3.10.1",
+    "simple-yenc": "^0.3.0",
     "size-limit": "^8.1.2",
     "vitest": "^0.28.2",
     "yoga-layout-prebuilt": "^1.10.0"
