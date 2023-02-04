@@ -34,7 +34,7 @@ const Yoga = initYoga();
 import initYoga from "yet-another-yoga-layout-fork";
 
 const Yoga = await initYoga(
-  await fetch(URL("yet-another-yoga-layout-fork/dist/yoga.wasm", import.meta))
+  await fetch(URL("yet-another-yoga-layout-fork/yoga.wasm", import.meta))
 );
 ```
 
@@ -46,9 +46,17 @@ import initYoga from "yet-another-yoga-layout-fork";
 
 const Yoga = await initYoga(
   await readFile(
-    URL("yet-another-yoga-layout-fork/dist/yoga.wasm", import.meta)
+    URL("yet-another-yoga-layout-fork/yoga.wasm", import.meta)
   )
 );
+```
+
+#### wasm (compat)
+
+```js
+import initYoga from "yet-another-yoga-layout-fork/compat";
+
+const Yoga = await initYoga();
 ```
 
 ## Size
@@ -56,9 +64,11 @@ const Yoga = await initYoga(
 | bundle                               | size (JS + WASM) gzip |
 | ------------------------------------ | --------------------- |
 | yoga-layout-prebuilt                 | 79.23 kB              |
-| yet-another-yoga-layout-fork/asm     | 46.67 kB              |
-| yet-another-yoga-layout-fork/asmSync | 46.62 kB              |
-| yet-another-yoga-layout-fork/wasm    | 10.4  kB + 29.42 kB   |
+| yet-another-yoga-layout-fork/asm     | 44.54 KB              |
+| yet-another-yoga-layout-fork/asmSync | 44.50 KB              |
+| yet-another-yoga-layout-fork/compat  | 42.04 KB              |
+| yet-another-yoga-layout-fork/wasm    |  9.88 KB + 28.38 KB   |
+
 
 ## Perf
 
