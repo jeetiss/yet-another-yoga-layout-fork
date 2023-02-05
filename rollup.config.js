@@ -38,6 +38,7 @@ export default [
       yEncode({ include: "tmp/yoga.wasm" }),
       nodeResolve(),
       commonjs(),
+      terser({ compress: { passes: 2 } }),
     ],
     external: ["#wasm"],
   },
