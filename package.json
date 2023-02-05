@@ -8,11 +8,18 @@
     ".": "./dist/index.js",
     "./asm": "./dist/asm.js",
     "./asmSync": "./dist/asmSync.js",
-    "./compat": "./dist/compat.js"
+    "./compat": "./dist/compat.js",
+    "./imports": "./dist/imports.js"
+  },
+  "imports": {
+    "#wasm": {
+      "browser": "./dist/browser-wasm.js",
+      "default": "./dist/node-wasm.js"
+    }
   },
   "scripts": {
     "echo:cow": "echo 'cow'",
-    "build": "make && rollup -c && cp tmp/yoga.wasm dist/yoga.wasm",
+    "build": "rollup -c && cp tmp/yoga.wasm dist/yoga.wasm",
     "gentest": "node ./test/gentest/run.js",
     "test": "npm run test:compat && npm run test:wasm && npm run test:asm && npm run test:asm-sync",
     "test:wasm": "vitest run --dir ./test",
@@ -50,6 +57,11 @@
       "path": "dist/compat.js",
       "import": "initYoga",
       "name": "compat"
+    },
+    {
+      "path": "dist/imports.js",
+      "import": "initYoga",
+      "name": "imports"
     }
   ],
   "devDependencies": {
@@ -57,12 +69,12 @@
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-terser": "^0.4.0",
     "@size-limit/preset-small-lib": "^8.1.2",
-    "@types/jscodeshift": "^0.11.5",
+    "@types/jscodeshift": "^0.11.6",
     "jscodeshift": "^0.14.0",
-    "rollup": "^3.10.1",
+    "rollup": "^3.14.0",
     "simple-yenc": "^0.3.0",
     "size-limit": "^8.1.2",
-    "vitest": "^0.28.2",
+    "vitest": "^0.28.4",
     "yoga-layout-prebuilt": "^1.10.0"
   }
 }

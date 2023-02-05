@@ -1,7 +1,6 @@
 import terser from "@rollup/plugin-terser";
 import commonjs from "@rollup/plugin-commonjs";
-import nodeResolve from '@rollup/plugin-node-resolve';
-
+import nodeResolve from "@rollup/plugin-node-resolve";
 
 import { createFilter } from "@rollup/pluginutils";
 import { dynamicEncode } from "simple-yenc";
@@ -30,7 +29,7 @@ function yEncode(opts = {}) {
 
 export default [
   {
-    input: ["asm.js", "index.js", "asmSync.js", "compat.js"],
+    input: ["asm.js", "index.js", "asmSync.js", "compat.js", "imports.js"],
     output: {
       dir: "dist",
       format: "esm",
@@ -39,7 +38,16 @@ export default [
       yEncode({ include: "tmp/yoga.wasm" }),
       nodeResolve(),
       commonjs(),
-      terser({ compress: { passes: 2 } }),
     ],
+    external: ["#wasm"],
+  },
+  {
+    input: ["browser-wasm.js", "node-wasm.js"],
+    output: {
+      dir: "dist",
+      format: "esm",
+    },
+    plugins: [commonjs()],
+    external: ["node:fs/promises"],
   },
 ];
