@@ -2,7 +2,9 @@ import { readFile } from "node:fs/promises";
 
 let Yoga;
 
-if (process.env.YOGA_BUILD === "compat") {
+if (process.env.YOGA_BUILD === "imports") {
+  Yoga = await (await import("../dist/imports")).default();
+} else if (process.env.YOGA_BUILD === "compat") {
   Yoga = await (await import("../dist/compat")).default();
 } else if (process.env.YOGA_BUILD === "asm") {
   Yoga = await (await import("../dist/asm")).default();

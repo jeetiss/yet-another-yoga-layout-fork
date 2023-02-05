@@ -19,13 +19,14 @@
   },
   "scripts": {
     "echo:cow": "echo 'cow'",
-    "build": "rollup -c && cp tmp/yoga.wasm dist/yoga.wasm",
+    "build": "make && rollup -c && cp tmp/yoga.wasm dist/yoga.wasm",
     "gentest": "node ./test/gentest/run.js",
-    "test": "npm run test:compat && npm run test:wasm && npm run test:asm && npm run test:asm-sync",
+    "test": "npm run test:imports && npm run test:compat && npm run test:wasm && npm run test:asm && npm run test:asm-sync",
     "test:wasm": "vitest run --dir ./test",
     "test:asm": "YOGA_BUILD='asm' vitest run --dir ./test",
     "test:asm-sync": "YOGA_BUILD='asmSync' vitest run --dir ./test",
     "test:compat": "YOGA_BUILD='compat' vitest run --dir ./test",
+    "test:imports": "YOGA_BUILD='imports' vitest run --dir ./test",
     "size": "size-limit",
     "benchmark": "node test/bench/run.js test/bench/index.js"
   },
