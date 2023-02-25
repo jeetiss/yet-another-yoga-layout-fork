@@ -1,4 +1,4 @@
-import terser from "@rollup/plugin-terser";
+import { minify, defineRollupSwcMinifyOption } from "rollup-plugin-swc3";
 import commonjs from "@rollup/plugin-commonjs";
 import nodeResolve from "@rollup/plugin-node-resolve";
 
@@ -38,7 +38,9 @@ export default [
       yEncode({ include: "tmp/yoga.wasm" }),
       nodeResolve(),
       commonjs(),
-      terser({ compress: { passes: 2 } }),
+      minify(defineRollupSwcMinifyOption({
+        compress: { passes: 2 }
+      })),
     ],
     external: ["#wasm"],
   },
